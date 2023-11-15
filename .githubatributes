@@ -1,0 +1,35 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Joystick;
+
+public class Robot {
+    private Talon left1 = new Talon(0);
+    private Talon left2 = new Talon(1);
+    private Talon right1 = new Talon(2);
+    private Talon right2 = new Talon(3);
+    
+    private SpeedControllerGroup leftMotors = new SpeedControllerGroup(left1, left2);
+    private SpeedControllerGroup rightMotors = new SpeedControllerGroup(right1, right2);
+    
+    private Joystick leftJoystick = new Joystick(0);
+    private Joystick rightJoystick = new Joystick(1);
+
+    public Robot() {
+        right2.follow(right1);
+        left2.follow(left1);
+    }
+
+    public void teleopPeriodic() {
+        double leftJoystickValue = -leftJoystick.getRawAxis(1);  // Invert joystick value if necessary
+        double rightJoystickValue = -rightJoystick.getRawAxis(1); // Invert joystick value if necessary
+
+        leftMotors.set(leftJoystickValue);
+        rightMotors.set(rightJoystickValue);
+    }
+
+    public void autonomousPeriodic() {
+        System.out.println("hello world");
+      
+}
